@@ -52,10 +52,10 @@ C:\Users\secur30nly\netuser-rs> cargo build --release
 The final EXE will be located at the path netuser-rs/target/release/netuser-rs.exe. 
 
 After the building, you can run the program with the ```-h``` flag to open the help menu:
-<img width="1116" alt="image" src="https://github.com/secur30nly/netuser-rs/assets/62586375/97dd48a5-b562-4726-ae4b-bfff61bca6f0">
+![image](https://github.com/secur30nly/netuser-rs/assets/62586375/2adb35b2-f71b-4731-a209-0a2a8ca2a0a2)
 
 For the test, let's create a user and add it to the admin group, then print the details of the created account:
-<img width="1059" alt="image" src="https://github.com/secur30nly/netuser-rs/assets/62586375/f4c9a94a-090e-48a5-93f4-ecdae73588f5">
+![image](https://github.com/secur30nly/netuser-rs/assets/62586375/a7139887-a0b2-461e-bee6-623903879449)
 
 ## Using as a DLL
 This option is useful if you need to perform the necessary operations when joining a process (for example: testing the Printnightmare vulnerability). 
