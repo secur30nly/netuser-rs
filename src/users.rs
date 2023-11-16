@@ -146,7 +146,7 @@ pub fn get_users() -> Result<Vec<String>, u32> {
 ///         return;
 ///     }
 ///}
-/// ``
+/// ```
 pub fn change_user_password(username: &str, password: &str) -> Result<(), u32> {
     set_user_info_1(username, password, false, true, false)
 }
