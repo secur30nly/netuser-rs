@@ -53,7 +53,7 @@ C:\Users\secur30nly\netuser-rs> cargo build --release
 The final EXE will be located at the path netuser-rs/target/release/netuser-rs.exe. 
 
 After the building, you can run the program with the ```-h``` flag to open the help menu:
-![image](https://github.com/secur30nly/netuser-rs/assets/62586375/2adb35b2-f71b-4731-a209-0a2a8ca2a0a2)
+![image](https://github.com/secur30nly/netuser-rs/assets/62586375/e0c155f3-2c79-4a94-a56f-3d590592a9c5)
 
 For the test, let's create a user and add it to the admin group, then print the details of the created account:
 ![image](https://github.com/secur30nly/netuser-rs/assets/62586375/a7139887-a0b2-461e-bee6-623903879449)
