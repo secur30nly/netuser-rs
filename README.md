@@ -9,6 +9,7 @@ The program is presented in two variants: DLL (for injection into the process) a
     * Creating local users with adding account description (Comment Section) 
     * Deleting a local user account
     * Change password for local user account
+    * Enable/disable a local user account
     * Get all user accounts in the system
     * Get a detailed description of a user account (net user username analog)
 * Operations over user account SIDs:
