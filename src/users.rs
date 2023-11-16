@@ -146,8 +146,59 @@ pub fn get_users() -> Result<Vec<String>, u32> {
 ///         return;
 ///     }
 ///}
-/// ```
+/// ``
 pub fn change_user_password(username: &str, password: &str) -> Result<(), u32> {
+    set_user_info_1(username, password, false, true, false)
+}
+
+/// Enable existing disabled user account.
+///
+/// If failed - returns Windows error.
+///
+/// # Examples
+///
+/// ```no_run
+/// use netuser_rs::users::enable_user_account;
+/// use netuser_rs::win_err_text;
+///
+/// fn main() {
+///     let username = "pentester";
+///     if let Err(err) = enable_user_account(username) {
+///         log::error!("Error: {} - {}\n", err, win_err_text(err));
+///         return;
+///     }
+///}
+/// ```
+pub fn enable_user_account(username: &str) -> Result<(), u32> {
+    set_user_info_1(username, "", true, false, false)
+}
+
+/// Disable existing user account.
+///
+/// If failed - returns Windows error.
+///
+/// # Examples
+///
+/// ```no_run
+/// use netuser_rs::users::disable_user_account;
+/// use netuser_rs::win_err_text;
+///
+/// fn main() {
+///     let username = "pentester";
+///     if let Err(err) = disable_user_account(username) {
+///         log::error!("Error: {} - {}\n", err, win_err_text(err));
+///         return;
+///     }
+///}
+/// ```
+pub fn disable_user_account(username: &str) -> Result<(), u32> {
+    set_user_info_1(username, "", false, false, true)
+}
+
+/// NetUserSetInfo wrapper. It's used to change the password and enable/disable the user account
+///
+/// If failed - returns Windows error.
+fn set_user_info_1(username: &str, password: &str, enable: bool, change_pass: bool, disable: bool) -> Result<(), u32> {
     let wide_username_nul = crate::encode_string_to_wide(username);
     let mut wide_password_nul = crate::encode_string_to_wide(password);
     let mut new_user_info_buf = std::ptr::null_mut::<u8>();
@@ -165,7 +216,15 @@ pub fn change_user_password(username: &str, password: &str) -> Result<(), u32> {
 
     let new_user_info = new_user_info_buf as *mut USER_INFO_1;
     unsafe {
-        (*new_user_info).usri1_password = wide_password_nul.as_mut_ptr();
+        if change_pass {
+            (*new_user_info).usri1_password = wide_password_nul.as_mut_ptr();
+        } 
+        if enable {
+            (*new_user_info).usri1_flags = 0;
+        } 
+        if disable {
+            (*new_user_info).usri1_flags = UF_ACCOUNTDISABLE;
+        }
     }
 
     unsafe {

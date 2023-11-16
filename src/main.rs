@@ -28,6 +28,20 @@ fn main() {
             }
             log::info!("Password of \"{}\" account changed", username);
         }
+        Commands::EnableUser { username } => {
+            if let Err(err) = netuser_rs::users::enable_user_account(username) {
+                log::error!("Error: {} - {}\n", err, netuser_rs::win_err_text(err));
+                return;
+            }
+            log::info!("\"{}\" account enabled", username);
+        }
+        Commands::DisableUser { username } => {
+            if let Err(err) = netuser_rs::users::disable_user_account(username) {
+                log::error!("Error: {} - {}\n", err, netuser_rs::win_err_text(err));
+                return;
+            }
+            log::info!("\"{}\" account disabled", username);
+        }
         Commands::AddToGroup {
             username,
             groupname,

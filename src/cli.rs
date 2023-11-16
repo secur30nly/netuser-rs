@@ -74,11 +74,24 @@ pub enum Commands {
         #[arg(short, long)]
         password: String,
     },
+    /// Enable local user account
+    EnableUser {
+        /// Name of the account to enable
+        #[arg(short, long)]
+        username: String,
+    },
+    /// Disable local user account
+    DisableUser {
+        /// Name of the account to disable
+        #[arg(short, long)]
+        username: String,
+    },
     /// List all user accounts
     GetUsers {},
     /// Get detailed info about user account
     GetUser {
         /// Name of the user account to show detailed information
+        #[arg(short, long)]
         username: String
     },
     /// Get all users that have specified privilege
