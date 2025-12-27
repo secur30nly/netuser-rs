@@ -165,7 +165,12 @@ pub fn get_user_groups(username: &str) -> Result<(Vec<String>, Vec<String>), u32
         if rc != NERR_Success {
             return Err(rc);
         }
-
+        if buffer.is_null() { // If the call succeeded but buffer is NULL, it means the user simply belongs to no groups.
+            return Ok((
+                vec!["None".to_string()],
+                vec!["None".to_string()],
+            ));
+        }
         std::slice::from_raw_parts(
             buffer as *const u8 as *const LOCALGROUP_USERS_INFO_0,
             entries_read as usize,
@@ -194,7 +199,12 @@ pub fn get_user_groups(username: &str) -> Result<(Vec<String>, Vec<String>), u32
         if rc != NERR_Success {
             return Err(rc);
         }
-
+        if buffer.is_null() {
+            return Ok((
+                vec!["None".to_string()],
+                vec!["None".to_string()],
+            ));
+        }
         std::slice::from_raw_parts(
             buffer as *const u8 as *const GROUP_USERS_INFO_0,
             entries_read as usize,
